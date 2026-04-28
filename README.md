@@ -1,4 +1,4 @@
-# PRD评审会模拟（多角色对抗版）
+# PRD Review Panel / PRD评审会模拟
 
 [English](#english) | [中文](#中文)
 
@@ -6,7 +6,7 @@
 
 ## English
 
-A multi-agent PRD review meeting simulator using 4 roles with adversarial feedback.
+A multi-agent PRD review meeting simulator using 4 roles with adversarial feedback. Simulates a real product review meeting before formal评审会.
 
 ### Installation
 
@@ -18,28 +18,30 @@ cd ~/.claude/skills && git clone https://github.com/rance811-maker/prd-review-pa
 
 1. Open Claude Code
 2. Paste your PRD content
-3. Trigger: mention "prd-review-panel" or "PRD评审会"
+3. Trigger: mention "prd-review-panel" or "PRD review meeting"
 
 ### Roles
 
 | Role | Focus | Style |
 |------|-------|-------|
-| 🤖 Tech Lead | Implementation complexity, risks | Strict, realistic |
-| 🤖 Design Lead | UX, interaction, consistency | Detail-oriented |
-| 🤖 Business Lead | ROI, value, priorities | Questions value |
+| 🤖 Tech Lead | Implementation complexity, stability, risks | Strict, realistic, can veto |
+| 🤖 Design Lead | UX, interaction consistency, understanding cost | Detail-oriented |
+| 🤖 Business Lead | ROI, business value, priorities | Questions "is this worth it?" |
 | 🤖 Product Lead | Summary, decision, consensus | Neutral, decisive |
 
 ### Review Flow
 
-1. **Round 1**: Quick understanding (all roles)
-2. **Round 2**: Focused challenges (per role)
-3. **Round 3**: Adversarial debate (real pushback)
-4. **Round 4**: Final verdict (Product Lead)
+```
+Round 1 → Quick understanding (all roles)
+Round 2 → Focused challenges (per role)
+Round 3 → Adversarial debate (real pushback)
+Round 4 → Final verdict (Product Lead)
+```
 
-### Output
+### Output Format
 
 ```
-🎯 评审结论：[❌/⚠️/✅]
+🎯 评审结论：[❌ Not Passed / ⚠️ Conditional / ✅ Approved]
 ⚠️ 关键问题：
 1. ...
 2. ...
@@ -48,14 +50,14 @@ cd ~/.claude/skills && git clone https://github.com/rance811-maker/prd-review-pa
 💡 次要优化建议：
 • ...
 
-📅 建议进入开发排期：[是/否]
+📅 建议进入开发排期：[Yes/No]
 ```
 
 ---
 
 ## 中文
 
-基于 4 个并行 Agent 模拟真实的 PRD 评审会。每个角色"站在自己立场说话"，有冲突、有质疑、有交锋。
+使用 4 个并行 AI Agent 模拟真实 PRD 评审会。每个角色"站在自己立场说话"，有冲突、有质疑、有交锋，帮助在正式评审前发现关键问题。
 
 ### 安装方式
 
@@ -73,22 +75,24 @@ cd ~/.claude/skills && git clone https://github.com/rance811-maker/prd-review-pa
 
 | 角色 | 关注点 | 风格 |
 |------|--------|------|
-| 🤖 技术负责人 | 实现复杂度、稳定性、风险 | 严格、现实 |
-| 🤖 设计负责人 | 用户体验、交互、理解成本 | 关注细节 |
-| 🤖 业务负责人 | 业务价值、ROI、优先级 | 质疑值不值 |
-| 🤖 产品负责人 | 总结收敛、推动决策 | 理性、不辩护 |
+| 🤖 技术负责人 | 实现复杂度、稳定性、风险 | 严格、现实，有一票否决权 |
+| 🤖 设计负责人 | 用户体验、交互一致性、理解成本 | 关注细节违和感 |
+| 🤖 业务负责人 | ROI、业务价值、优先级 | 质疑"做这个值不值" |
+| 🤖 产品负责人 | 总结收敛、推动决策 | 理性、不替人辩护 |
 
 ### 评审流程
 
-1. **第1轮**：快速理解（所有角色）
-2. **第2轮**：集中质疑（各角色）
-3. **第3轮**：冲突交锋（真实反驳）
-4. **第4轮**：最终结论（产品负责人）
+```
+第1轮 → 快速理解（所有角色）
+第2轮 → 集中质疑（各角色）
+第3轮 → 冲突交锋（真实反驳）
+第4轮 → 最终结论（产品负责人）
+```
 
 ### 输出格式
 
 ```
-🎯 评审结论：[❌/⚠️/✅]
+🎯 评审结论：[❌ 不通过 / ⚠️ 有条件通过 / ✅ 可以推进]
 ⚠️ 关键问题：
 1. ...
 2. ...
@@ -98,4 +102,37 @@ cd ~/.claude/skills && git clone https://github.com/rance811-maker/prd-review-pa
 • ...
 
 📅 建议进入开发排期：[是/否]
+```
+
+---
+
+## Example 输出示例
+
+```markdown
+═══════════════════════════════════════
+🎭 PRD 评审会
+═══════════════════════════════════════
+
+【第1轮】快速理解
+🤖 技术负责人：...
+🤖 设计负责人：...
+🤖 业务负责人：...
+🤖 产品负责人：...
+
+【第2轮】集中质疑
+🤖 技术负责人：是否支持推进：[有条件支持]
+🤖 设计负责人：...
+🤖 业务负责人：ROI判断：[待证明]
+
+【第3轮】冲突交锋
+[技术 vs 业务] [设计 vs 技术] [产品 vs 各方]
+
+【第4轮】最终结论
+🎯 评审结论：⚠️ 有条件通过
+⚠️ 关键问题：
+1. 知识库建设方案缺失
+2. 518时间线与功能范围不匹配
+3. 售前售后混合场景无解
+
+📅 建议进入开发排期：否
 ```
