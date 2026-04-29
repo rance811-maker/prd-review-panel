@@ -29,6 +29,22 @@ cd ~/.claude/skills && git clone https://github.com/rance811-maker/prd-review-pa
 | 🤖 Business Lead | ROI, business value, priorities | Questions "is this worth it?" |
 | 🤖 Product Lead | Summary, decision, consensus | Neutral, decisive |
 
+### Agent PRD Review Dimensions (AI Agent Specific)
+
+This skill is optimized for AI Agent PRD reviews, with additional focus on:
+
+| Dimension | Key Questions |
+|-----------|---------------|
+| Background & Goals | Why Agent vs traditional solution? |
+| Agent Identity & Boundaries | In/Out of Scope? Decision authority? |
+| Input/Output Contract | Schema with confidence & evidence? |
+| Behavior Rules | Anti-patterns? Hallucination prevention? |
+| Evaluation Plan | Offline eval set? Failure mode monitoring? |
+| Human-AI Collaboration | Human fallback entry point? |
+| Launch Strategy | Gradual rollout? Rollback conditions? |
+| Evolution Roadmap | V1 boundaries? Data flywheel? |
+| Risks & Mitigation | Agent-specific risks (hallucination, overreach)? |
+
 ### Review Flow
 
 ```
@@ -79,6 +95,22 @@ cd ~/.claude/skills && git clone https://github.com/rance811-maker/prd-review-pa
 | 🤖 设计负责人 | 用户体验、交互一致性、理解成本 | 关注细节违和感 |
 | 🤖 业务负责人 | ROI、业务价值、优先级 | 质疑"做这个值不值" |
 | 🤖 产品负责人 | 总结收敛、推动决策 | 理性、不替人辩护 |
+
+### Agent PRD 评审维度（AI Agent 特有）
+
+本 skill 针对 AI Agent 类 PRD 优化，新增以下评审重点：
+
+| 维度 | 关键问题 |
+|------|----------|
+| 背景与目标 | 为什么用 Agent 而不是传统方案？ |
+| Agent 身份与边界 | In/Out of Scope？决策权限？ |
+| 输入输出契约 | schema 含置信度和 evidence？ |
+| 行为规约 | 反例清单？幻觉防范机制？ |
+| 评估方案 | 离线评估集？失败模式监控？ |
+| 人机协作 | 人工兜底入口？反馈回流？ |
+| 上线策略 | 灰度节奏？回滚条件？ |
+| 演进路线 | V1 边界？数据飞轮？ |
+| 风险与应对 | Agent 特有风险（幻觉、越权）？ |
 
 ### 评审流程
 
