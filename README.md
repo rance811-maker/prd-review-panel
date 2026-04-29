@@ -168,3 +168,18 @@ cd ~/.claude/skills && git clone https://github.com/rance811-maker/prd-review-pa
 
 📅 建议进入开发排期：否
 ```
+
+---
+
+## References 参考材料
+
+| 文件 | 说明 |
+|------|------|
+| [references/agent-prd-outline.md](./references/agent-prd-outline.md) | AI Agent PRD 合规大纲 — 什么样的 PRD 才算合格 |
+
+### 使用建议
+
+> 💡 **先用大纲自审，再用 Panel 评审**
+>
+> 1. 先用 `agent-prd-outline.md` 检查自己的 PRD 是否符合基本要求
+> 2. 再用 `prd-review-panel` 模拟多角色对抗，提前发现团队会提的问题
