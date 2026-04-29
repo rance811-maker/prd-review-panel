@@ -1,12 +1,15 @@
 ---
 name: prd-review-panel
-description: Use when simulating a PRD review meeting with multiple roles in conflict, or when you want adversarial feedback on requirements. Triggers: user asks for panel review, multi-role review, PRD debate.
+description: Use when reviewing an Agent PRD or product requirements document with multiple stakeholders. Simulates adversarial review meeting with tech, design, business, and product roles. Triggers: user asks for PRD panel review, multi-role review, PRD debate, requirements validation.
 ---
 
 # PRD评审会模拟（多角色对抗版）
 
 ## Overview
+
 使用 4 个并行 Agent 模拟真实的 PRD 评审会。每个角色"站在自己立场说话"，有冲突、有质疑、有交锋。
+
+**特别适配：** 本 skill 针对 AI Agent 类 PRD 优化，除了通用评审维度外，还会检查 Agent 特有的设计要素（上下文边界、决策权限、人机协作等）。
 
 ## 参与角色
 
@@ -17,69 +20,78 @@ description: Use when simulating a PRD review meeting with multiple roles in con
 | 业务负责人 | 🟡 黄帽 | 业务价值、转化、增长、ROI | 质疑值不值 |
 | 产品负责人 | 🔵 蓝帽 | 总结收敛、推动决策 | 理性、不替人辩护 |
 
-## 评审流程
+## Agent PRD 评审重点
 
-### 角色任务分配
+针对 AI Agent 类 PRD，需额外关注以下维度：
 
-**Agent 1 - 技术负责人**
-你是技术负责人。关注：
-- 实现复杂度和技术可行性
-- 系统稳定性、性能风险
-- 哪些需求成本过高
-- 是否有一票否决权可以阻止
+### 1. 背景与目标
+- [ ] 业务问题是否描述清晰？
+- [ ] **是否回答了"为什么用 Agent 而不是传统方案"？**（必答项）
+- [ ] 成功标准是否可衡量？
 
-风格：严格、现实、会直接说"做不了"或"太复杂"。
+### 2. Agent 身份与边界
+- [ ] 角色定义是否清晰？
+- [ ] **In Scope / Out of Scope 是否明确？**（Agent 最容易 scope creep）
+- [ ] 决策权限边界是否定义？
 
-**Agent 2 - 设计负责人**
-你是设计负责人。关注：
-- 用户是否能理解这个功能
-- 交互流程是否自然合理
-- 体验是否有断裂或违和点
-- 理解成本是否过高
+### 3. 输入输出契约
+- [ ] 输入 schema 是否有降级策略？
+- [ ] **输出 schema 是否包含置信度和 evidence？**（Agent 输出的关键）
+- [ ] 异常情况处理是否完备？
 
-风格：挑体验问题，关注细节，关注用户会不会困惑。
+### 4. 行为规约
+- [ ] 关键情境的应有倾向是否定义？
+- [ ] **反例清单是否存在？**（告诉 Agent 什么是错的同样重要）
+- [ ] 幻觉防范机制？
 
-**Agent 3 - 业务/运营负责人**
-你是业务负责人。关注：
-- 业务价值和优先级
-- 投入产出比是否合理
-- 有没有更高ROI的替代方案
-- 不做的后果是什么
+### 5. 评估方案
+- [ ] 离线评估集是否建立？
+- [ ] **失败模式监控是否设计？**（Agent 容易 silent failure）
+- [ ] 在线 A/B 如何设计？
 
-风格：质疑"做这个到底值不值"，要求证明价值。
+### 6. 人机协作
+- [ ] 自主决策范围是否定义？
+- [ ] **人工兜底入口是否明确？**（什么情况下人介入）
+- [ ] 反馈回流机制？
 
-**Agent 4 - 产品负责人**
-你是产品负责人。关注：
-- 收集各方意见
-- 识别核心问题
-- 推动收敛决策
-- 给出明确结论
+### 7. 上线策略
+- [ ] 冷启动方案？
+- [ ] **灰度节奏是否规划？**（Agent 上线需谨慎）
+- [ ] 回滚条件？
 
-风格：理性中立，不替PRD作者辩护，推进会议。
+### 8. 演进路线
+- [ ] V1 边界（故意不做的事）？
+- [ ] V2 触发条件？
+- [ ] **数据飞轮设计？**（Agent 需要持续学习）
+
+### 9. 风险与应对
+- [ ] 已知风险清单？
+- [ ] **Agent 特有风险（幻觉、越权、数据泄露）？**
+- [ ] 应对预案？
 
 ---
 
-## 执行步骤
+## 评审流程
 
-**Step 1: 并行调度 4 个 Agent**
+### Step 1: 并行调度 4 个 Agent
 
 同时调度 4 个 Agent，每个 Agent 收到：
 - 对应的角色定义
 - 完整 PRD 内容
-- 具体发言要求
+- Agent PRD 评审重点清单
 
-**Step 2: 收集各方意见**
+### Step 2: 收集各方意见
 
 等待 4 个 Agent 返回各自的第一轮发言（理解 + 质疑）
 
-**Step 3: 模拟冲突交锋**
+### Step 3: 模拟冲突交锋
 
 基于各方意见，模拟角色之间的真实反驳：
 - 技术 vs 业务（实现成本 vs 业务价值）
 - 设计 vs 技术（体验期望 vs 技术现实）
 - 产品 vs 各方（推进收敛）
 
-**Step 4: 产品负责人给出最终结论**
+### Step 4: 产品负责人给出最终结论
 
 1. 评审结论（选一个）：
    - ❌ 不通过（需重写）
@@ -89,6 +101,53 @@ description: Use when simulating a PRD review meeting with multiple roles in con
 2. 关键问题（最多3条）
 3. 次要优化建议
 4. 是否建议进入开发排期
+
+---
+
+## 角色任务分配
+
+**Agent 1 - 技术负责人**
+
+你是技术负责人。关注：
+- 实现复杂度和技术可行性
+- 系统稳定性、性能风险
+- 哪些需求成本过高
+- **Agent 特有的技术风险：上下文溢出、token 成本、幻觉率、调用链路复杂性**
+- 是否有一票否决权可以阻止
+
+风格：严格、现实、会直接说"做不了"或"太复杂"。
+
+**Agent 2 - 设计负责人**
+
+你是设计负责人。关注：
+- 用户是否能理解这个功能
+- 交互流程是否自然合理
+- 体验是否有断裂或违和点
+- 理解成本是否过高
+- **人机协作界面的合理性**（人什么时候介入、以什么方式介入）
+
+风格：挑体验问题，关注细节，关注用户会不会困惑。
+
+**Agent 3 - 业务/运营负责人**
+
+你是业务负责人。关注：
+- 业务价值和优先级
+- 投入产出比是否合理
+- 有没有更高ROI的替代方案
+- 不做的后果是什么
+- **Agent 的边际成本是否可控**（每次调用的成本 vs 价值）
+
+风格：质疑"做这个到底值不值"，要求证明价值。
+
+**Agent 4 - 产品负责人**
+
+你是产品负责人。关注：
+- 收集各方意见
+- 识别核心问题
+- 推动收敛决策
+- 给出明确结论
+
+风格：理性中立，不替PRD作者辩护，推进会议。
 
 ---
 
@@ -146,3 +205,19 @@ description: Use when simulating a PRD review meeting with multiple roles in con
 
 📅 建议进入开发排期：[是/否] - 理由
 ```
+
+---
+
+## 快速参考
+
+| 评审维度 | 关键问题 |
+|----------|----------|
+| 背景与目标 | 为什么用 Agent？成功标准是什么？ |
+| 身份与边界 | In/Out of Scope？决策权限？ |
+| 输入输出 | schema 有降级？输出含置信度？ |
+| 行为规约 | 反例清单？幻觉防范？ |
+| 评估方案 | 失败模式监控？ |
+| 人机协作 | 人工兜底入口？ |
+| 上线策略 | 灰度节奏？回滚条件？ |
+| 演进路线 | V1 边界？数据飞轮？ |
+| 风险应对 | Agent 特有风险？ |
